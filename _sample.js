@@ -35,8 +35,8 @@ var tickers = function (){
   });
 }
 
-// orderbooks();
-// tickers();
+orderbooks();
+tickers();
 
 
 
