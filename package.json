@@ -1,0 +1,19 @@
+{
+  "name": "itbit-api-wrapper",
+  "version": "0.1.0",
+  "description": "api wrapper for itbit services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "itbit"
+  ],
+  "author": "Toni Lim <tlim@itbit.com>",
+  "license": "MIT",
+  "dependencies": {
+    "crypto": "0.0.3",
+    "qs": "^6.3.0",
+    "request": "^2.79.0"
+  }
+}
