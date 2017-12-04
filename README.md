@@ -4,7 +4,7 @@ This wrapper is written as example for connecting itBit Exchange API using javas
 
 ### Requirement
 
-- This lib is tested and worked on `Node 2.3.0`
+- This lib is tested and worked on `Node 4.6.0`
 
 ### How to Run
 
