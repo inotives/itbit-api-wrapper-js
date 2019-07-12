@@ -1,97 +1,73 @@
-var itBitApiConnection = require('./ItbitApi.js');
+import ItbitApi from './ItbitApi';
+const creds = require('./creds.json');
 
-// ---- PROD Cred -----
-var apiEndpoint = "https://api.itbit.com/v1";
-var userId = "your-user-id";
-var apiKey = "your-api-key";
-var apiSecret = "your-api-secret";
+const api = new ItbitApi(creds[0].key, creds[0].secret, creds[0].userId)
+
+// PUBLIC ENDPOINT EXAMPLES:
+
+// calling GET TICKER
+api.getTickers("XBTUSD")
+  .then( res => {
+    console.log("XBTUSD-TICKER")
+    console.log(res.data)
+  })
+
+// calling GET ORDER BOOKS
+// api.getOrderbooks("XBTUSD")
+//   .then( orderbook => {
+//       console.log(orderbook.data)
+//   })
+
+// PRIVATE ENDPOINT EXAMPLES:
 
 
-// create an itbit client wrapper object
-var itbitApi = new itBitApiConnection(apiEndpoint, apiKey, apiSecret, userId);
+// caling GET ALL WALLETS
+api.getWallets()
+  .then( wallets => {
+    console.log("WALLETS:")
+    console.log(wallets.data)
+  })
 
-
-// PUBLIC API -------------------------------------------------------------------------------------------
-
-var orderbooks = function(){
-  itbitApi.getOrderBooks('XBTUSD', function(err, res, data){
-    console.log('\n>> PUBLIC API :');
-
-    console.log('--- GET ORDERBOOK ---');
-    if (err) return console.log(err);
-    console.log(data);
-
-  });
-};
-
-var tickers = function (){
-  itbitApi.getTickers('XBTUSD', function(err, res, data){
-    console.log('\n>> PUBLIC API :');
-
-    console.log('--- GET TICKER ---');
-    if (err) return console.log(err);
-    console.log(data);
-
-  });
-}
-
-orderbooks();
-tickers();
+// Creating New Wallet
+// api.newWallet("XXTest")
+//   .then( resp => {
+//     console.log(resp.data)
+//   })
 
 
 
+// caling GET A WALLET
+// api.getWallet("b903d575-47ad-4972-80d1-c49a66192cf5")
+//   .then( wallets => {
+//     console.log(wallets.data)
+//   })
 
+// List all the trades history in a wallet
+// api.getWalletTrades("b903d575-47ad-4972-80d1-c49a66192cf5")
+//   .then( trades => {
+//     console.log(trades.data)
+//   })
 
-// PRIVATE API ------------------------------------------------------------------------------------------
+// create new order
+// api.newOrder("d576984c-7463-41ad-bbdb-5cb3336e5eab", 'buy', 'limit', 'XBT', 0.00001, 5000, 'XBTUSD')
+//   .then( order => {
+//     console.log(order.data)
+//   })
 
-// note: using async package here to run each method in series, else you could also use the call back (similar to get ticker example)
+// // list orders
+// api.getOrders("d576984c-7463-41ad-bbdb-5cb3336e5eab", {status: 'open'})
+//   .then( orders => {
+//     console.log(orders.data)
+//   })
+//
+// get 1 order
+// api.getOrder("d576984c-7463-41ad-bbdb-5cb3336e5eab", "f0dafc84-e3f0-4378-afbf-7d3136a4227e")
+//   .then( order => {
+//     console.log(order.data)
+//   })
 
-/* -------------------------------------------------------------------------------------------
-Sample Test Cases 01 (run 1s after get ticker api):
-- First get all wallets (by default user will have 1 wallets created when account is created)
-- Next get the wallet and show the available balances
----------------------------------------------------------------------------------------------- */
-
-
-// uncomment the following .....
-
-setTimeout(function(){
-  //your code to be executed after 1 seconds
-  console.log('\n>> PRIVATE API :');
-  itbitApi.getAllWallets(null, function(err, res, wallets){
-    if(err) return console.log(err);
-    console.log('>> ALL Wallets');
-    var all_wallets = JSON.parse(wallets);
-    //display all wallets
-    console.log(all_wallets);
-
-    first_wallet_id = all_wallets[0].id;
-
-    // itbitApi.createOrder(first_wallet_id, 'buy', 'limit', 'XBT', '0.0001', '200','XBTUSD', null, null, function(order_err, order_res, order_info){
-    //   if(order_err) {
-    //     console.log(order_err);
-    //     console.log(order_res);
-    //     return ;
-    //   }
-    // });
-
-
-    // itbitApi.getWalletOrders(first_wallet_id, {status: 'open'}, function(error, res, result){
-    //   console.log('All Orders::');
-    //   console.log(result);
-    // });
-
-    // itbitApi.getOrders(first_wallet_id, {status:"open"}, function(error, res, result){
-    //   console.log(result);
-    // });
-
-
-    // itbitApi.getWalletTrades(first_wallet_id, {}, function(err, res, data){
-    //   console.log(data);
-    // })
-
-  });
-
-
-
-}, 1000);
+// // cancelling order
+// api.cancelOrders("d576984c-7463-41ad-bbdb-5cb3336e5eab", "f0dafc84-e3f0-4378-afbf-7d3136a4227e")
+//   .then( order => {
+//     console.log(order.data)
+//   })

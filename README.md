@@ -1,10 +1,10 @@
 # itbit-api-wrapper
 
-This wrapper is written as example for connecting itBit Exchange API using javascript.
+This wrapper is written as example for connecting itBit Exchange API using javascript (ES8)
 
 ### Requirement
 
-- This lib is tested and worked on `Node 4.1.0`
+- This lib is tested and worked on `Node 10.16.0`
 
 ### How to Run
 
