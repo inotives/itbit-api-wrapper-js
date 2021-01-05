@@ -14,7 +14,7 @@
   "author": "Toni Lim <inotives@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "qs": "^6.7.0"
   },
   "devDependencies": {
